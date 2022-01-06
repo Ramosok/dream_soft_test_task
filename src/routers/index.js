@@ -1,32 +1,17 @@
-import React, {useContext} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom'
-import {privateRoutes, publicRoutes} from "../routes";
-import {CHAT_ROUTE, LOGIN_ROUTE} from "../utils/consts";
-import {useAuthState} from "react-firebase-hooks/auth";
-import {Context} from "../index";
+import {LOGIN_ROUTE, NEWS_ROUTE} from "./routesName";
+import {Login} from "../Login";
+import {News} from "../pages/News";
 
-const AppRouter = () => {
-    const {auth} = useContext(Context)
-    const [user] = useAuthState(auth)
+export const publicRoutes = [
+    {
+        path: LOGIN_ROUTE,
+        Component: Login
+    }
+]
 
-    return user ?
-        (
-            <Switch>
-                {privateRoutes.map(({path, Component}) =>
-                    <Route key={path} path={path} component={Component} exact={true}/>
-                )}
-                <Redirect to={CHAT_ROUTE}/>
-            </Switch>
-        )
-        :
-        (
-            <Switch>
-                {publicRoutes.map(({path, Component}) =>
-                    <Route key={path} path={path} component={Component} exact={true}/>
-                )}
-                <Redirect to={LOGIN_ROUTE}/>
-            </Switch>
-        )
-};
-
-export default AppRouter;
+export const privateRoutes = [
+    {
+        path: NEWS_ROUTE,
+        Component: News
+    }
+]

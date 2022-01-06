@@ -1,0 +1,27 @@
+.news_container {
+    border: 2px solid #9c1b1b;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.news_img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    margin: 20px;
+}
+
+.inner_container {
+    display: flex;
+}
+
+h2 {
+    text-align: center;
+}
+
+.inline_block {
+    display: inline-block;
+}
+.inline_block:nth-child(2) {
+    float: right;
+}
