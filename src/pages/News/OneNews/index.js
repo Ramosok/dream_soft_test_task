@@ -1,9 +1,33 @@
+import firebase from "firebase";
+import {useCollectionData} from "react-firebase-hooks/firestore";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {useContext, useState} from "react";
 import {Like} from "../../../components/Like";
 import {FormatDate} from "../../../helpers";
+import {Context} from "../../../index";
+import {Comment} from "./Comment";
 import styles from './oneNews.module.css'
 
 
-export const OneNews = ({title, description, author, image, published}) => {
+export const OneNews = ({title, url, description, author, image, published}) => {
+    const {auth, firestore} = useContext(Context)
+    const [user] = useAuthState(auth)
+    const [value, setValue] = useState('')
+    const [messages] = useCollectionData(
+        firestore.collection(title)
+    );
+
+    const sendMessage = async () => {
+        if (value) {
+            firestore.collection(title).add({
+                uid: user.uid,
+                displayName: user.displayName,
+                text: value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+        setValue('')
+    }
 
 
     return (
@@ -15,9 +39,19 @@ export const OneNews = ({title, description, author, image, published}) => {
                     <p>{description}</p>
                 </div>
                 <p className={styles.inline_block}>Author {author}</p>
+                <p><a href={url} target="_blank" rel="noreferrer">Источник....</a></p>
                 <p className={styles.inline_block}>{FormatDate(published)}</p>
             </div>
             <Like/>
+            <input onChange={event => setValue(event.target.value)} type="textarea"/>
+            <button onClick={sendMessage}>Add comment</button>
+            {messages && messages.map(({displayName, text, createdAt}) =>
+                <Comment
+                    key={createdAt}
+                    displayName={displayName}
+                    text={text}
+                />
+            )}
         </div>
     );
 };

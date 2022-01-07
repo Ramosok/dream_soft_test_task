@@ -1,0 +1,8 @@
+.comment_container {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.author {
+    font-size: 10px;
+}

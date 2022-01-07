@@ -1,4 +1,15 @@
 .login {
-
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+    height: 85vh;
 }
 
+.btn {
+    max-height: 200px;
+    margin-top: 200px;
+    padding: 50px;
+    font-size: 25px;
+    background-color: #d4d40d;
+    box-shadow: 5px 13px 5px black;
+}

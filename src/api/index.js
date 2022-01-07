@@ -1,6 +1,8 @@
+//По хорошему должно было быть так.
 // const baseUrl = process.env.REACT_APP_API_URL;
+
+//const apiKey = 'apiKey=LP2vsKYx_iDef8H_ElrfDWpKQ1aEGCCu1xFGioULxnwz_4so'
 const baseUrl = 'https://api.currentsapi.services/v1/';
-const apiKey = 'apiKey=LP2vsKYx_iDef8H_ElrfDWpKQ1aEGCCu1xFGioULxnwz_4so'
 
 export const sendRequest = async (
     path,
