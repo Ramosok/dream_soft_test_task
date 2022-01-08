@@ -13,13 +13,13 @@ export const OneNews = ({title, url, description, author, image, published}) => 
     const {auth, firestore} = useContext(Context)
     const [user] = useAuthState(auth)
     const [value, setValue] = useState('')
-    const [messages] = useCollectionData(
-        firestore.collection(title)
+   const [messages] = useCollectionData(
+        firestore.collection(published)
     );
 
     const sendMessage = async () => {
         if (value) {
-            firestore.collection(title).add({
+            firestore.collection(published).add({
                 uid: user.uid,
                 displayName: user.displayName,
                 text: value,
@@ -28,7 +28,6 @@ export const OneNews = ({title, url, description, author, image, published}) => 
         }
         setValue('')
     }
-
 
     return (
         <div className={styles.news_container}>
@@ -45,11 +44,12 @@ export const OneNews = ({title, url, description, author, image, published}) => 
             <Like/>
             <input onChange={event => setValue(event.target.value)} type="textarea"/>
             <button onClick={sendMessage}>Add comment</button>
-            {messages && messages.map(({displayName, text, createdAt}) =>
+           {messages && messages.map(({displayName, text, createdAt}) =>
                 <Comment
                     key={createdAt}
                     displayName={displayName}
                     text={text}
+                    title={title}
                 />
             )}
         </div>

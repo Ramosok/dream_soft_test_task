@@ -8,18 +8,19 @@ export const Header = () => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
 
-        return (
-            <div className={styles.header}>
-                {
-                    user &&
-                    <div>
-                        <div className={styles.user}><img src={user.photoURL} alt=""/><p>{user.displayName}</p></div>
-                        <button onClick={() => auth.signOut()}>{EXIT}</button>
-                    </div>
-                }
-                <h1 className={styles.tittle}>{WORLD_NEWS}</h1>
-            </div>
-        );
+    return (
+        <div className={styles.header}>
+            {
+                user &&
+                <div>
+                    <div className={styles.user}><img src={user.photoURL} alt=""/><p>{user.displayName}</p></div>
+                    <button onClick={() => auth.signOut()}>{EXIT}</button>
+                </div>
+            }
+            <h1 className={styles.tittle}>{WORLD_NEWS}</h1>
+
+        </div>
+    );
 
 };
 
