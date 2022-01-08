@@ -22,7 +22,6 @@ export const News = () => {
                 const data = await getCategories(categories);
 
                 setNewsList(data)
-                console.log(data)
 
             } catch (e) {
                 console.log(e);
@@ -35,7 +34,6 @@ export const News = () => {
         fetchNews();
     }, [fetchNews]);
 
-    console.log(news)
 
     return (
 

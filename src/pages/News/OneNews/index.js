@@ -13,7 +13,7 @@ export const OneNews = ({title, url, description, author, image, published}) => 
     const {auth, firestore} = useContext(Context)
     const [user] = useAuthState(auth)
     const [value, setValue] = useState('')
-   const [messages] = useCollectionData(
+    const [messages] = useCollectionData(
         firestore.collection(published)
     );
 
@@ -44,12 +44,11 @@ export const OneNews = ({title, url, description, author, image, published}) => 
             <Like/>
             <input onChange={event => setValue(event.target.value)} type="textarea"/>
             <button onClick={sendMessage}>Add comment</button>
-           {messages && messages.map(({displayName, text, createdAt}) =>
+            {messages && messages.map(({displayName, text, createdAt}) =>
                 <Comment
                     key={createdAt}
                     displayName={displayName}
                     text={text}
-                    title={title}
                 />
             )}
         </div>
